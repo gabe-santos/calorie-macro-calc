@@ -8,13 +8,22 @@ import { Tooltip } from './Tooltip';
 export const App = () => {
 	const dietOptions = ['Standard'];
 	const unitOptions = ['Imperial', 'Metric'];
-	const activityOptions = [
-		'Sedentary',
-		'Lightly Active',
-		'Moderately Active',
-		'Very Active',
-		'Extremely Active',
+	// const activityOptions = [
+	// 	'Sedentary',
+	// 	'Lightly Active',
+	// 	'Moderately Active',
+	// 	'Very Active',
+	// 	'Extremely Active',
+	// ];
+
+	const activityOptions: { lvl: string; scaleFactor: number }[] = [
+		{ lvl: 'Sedentary', scaleFactor: 1.2 },
+		{ lvl: 'Lightly Active', scaleFactor: 1.375 },
+		{ lvl: 'Moderately Active', scaleFactor: 1.55 },
+		{ lvl: 'Very Active', scaleFactor: 1.725 },
+		{ lvl: 'Extremely Active', scaleFactor: 1.9 },
 	];
+
 	const goalOptions = [
 		'Lose Weight',
 		'Slowly Lose Weight',
@@ -69,7 +78,7 @@ export const App = () => {
 		target: { value: SetStateAction<number> };
 	}) => {
 		console.log(e.target);
-		setGoal(e.target.value);
+		setGoal(String(e.target.value));
 	};
 
 	const handleProteinChange = (e: {
@@ -94,7 +103,7 @@ export const App = () => {
 		return mifflinStJeor(mass, heightCM);
 	};
 
-	const mifflinStJeor = (mass, heightCM) => {
+	const mifflinStJeor = (mass: number, heightCM: number) => {
 		let s = sex == 'male' ? 5 : -161;
 		return Math.floor(10 * mass + 6.25 * heightCM - 5.0 * age + s);
 	};
