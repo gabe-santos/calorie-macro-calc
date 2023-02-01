@@ -1,8 +1,9 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import './App.css';
 import { NumInput } from './NumInput';
 import { Select } from './Select';
 import { Slider } from './Slider';
+import { Tooltip } from './Tooltip';
 
 export const App = () => {
   const dietOptions = ['Standard'];
@@ -23,15 +24,52 @@ export const App = () => {
   ];
 
   const [age, setAge] = useState(18);
-  const [weight, setWeight] = useState()
+  const [weight, setWeight] = useState(120);
+  const [height, setHeight] = useState(60);
+  const [sex, setSex] = useState('male');
+  const [activityLvl, setActivityLvl] = useState('Sedentary');
+  const [goal, setGoal] = useState('Maintain Weight');
   const [proteinVal, setProteinVal] = useState(1.0);
   const [carbPercent, setCarbPercent] = useState(50);
-  
+  const [bmr, setBmr] = useState(0);
 
   const handleAgeChange = (e: {
     target: { value: SetStateAction<number> };
   }) => {
     setAge(e.target.value);
+  };
+
+  const handleWeightChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    setWeight(e.target.value);
+  };
+
+  const handleHeightChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    setHeight(e.target.value);
+  };
+
+  const handleSexChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    console.log(e.target);
+    setSex(e.target.value);
+  };
+
+  const handleActivityChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    console.log(e.target);
+    setActivityLvl(e.target.value);
+  };
+
+  const handleGoalChange = (e: {
+    target: { value: SetStateAction<number> };
+  }) => {
+    console.log(e.target);
+    setGoal(e.target.value);
   };
 
   const handleProteinChange = (e: {
@@ -46,24 +84,40 @@ export const App = () => {
     setCarbPercent(e.target.value);
   };
 
-  // const [maleSelected, setMaleSelected] = useState(true);
-  // const handleGenderSelect = (e) => {
-  //   console.log(e.target.value);
-  //   setMaleSelected((s) => !s);
-  //   // console.log(maleSelected);
-  // };
+  useEffect(() => {
+    setBmr(() => calculateBMR());
+  });
+
+  const calculateBMR = () => {
+    let mass = weight * 0.453592;
+    let heightCM = height * 2.54;
+    return mifflinStJeor(mass, heightCM);
+  };
+
+  const mifflinStJeor = (mass, heightCM) => {
+    let s = sex == 'male' ? 5 : -161;
+    return Math.floor(10 * mass + 6.25 * heightCM - 5.0 * age + s);
+  };
 
   return (
     <div className="App">
       <h1 className="text-4xl">Calorie and Macro Calculator</h1>
-      <div className="container mx-auto">
+      <div className="container p-5 mx-auto">
         <Select label={'Diet'} options={dietOptions} />
         <Select label={'Units'} options={unitOptions} />
         <NumInput label={'Age'} value={age} onChange={handleAgeChange} />
-        <NumInput label={'Weight'} value={weight} onChange={handleWeightChange}/>
-        <NumInput label={'Height'} value={height} onChange={handleHeightChange}/>
+        <NumInput
+          label={'Weight'}
+          value={weight}
+          onChange={handleWeightChange}
+        />
+        <NumInput
+          label={'Height'}
+          value={height}
+          onChange={handleHeightChange}
+        />
 
-        <div className="container flex-col">
+        <form className="container flex-col">
           <label className="label">Sex</label>
           <div className="btn-group flex">
             <input
@@ -71,19 +125,35 @@ export const App = () => {
               name="sex"
               className="btn"
               data-title="Male"
-              checked
+              value="male"
+              onChange={handleSexChange}
             />
             <input
               type="radio"
               name="sex"
               className="btn"
               data-title="Female"
+              value="female"
+              onChange={handleSexChange}
             />
           </div>
-        </div>
+        </form>
 
-        <Select label={'Activity Level'} options={activityOptions} />
-        <Select label={'Goal'} options={goalOptions} />
+        <div className="flex">
+          <Select
+            label={'Activity Level'}
+            options={activityOptions}
+            value={activityLvl}
+            onChange={handleActivityChange}
+          />
+          {/* <Tooltip content={'level of activity'} /> */}
+        </div>
+        <Select
+          label={'Goal'}
+          options={goalOptions}
+          value={goal}
+          onChange={handleGoalChange}
+        />
 
         <Slider
           label={'Daily Protein'}
@@ -107,6 +177,16 @@ export const App = () => {
       <div className="container">
         <h1>Test Display</h1>
         <div>Age: {age}</div>
+        <div>Weight: {weight}</div>
+        <div>Height: {height}</div>
+        <div>Sex: {sex}</div>
+        <div>Activity Level: {activityLvl}</div>
+        <div>Goal: {goal}</div>
+        <div>Daily Protein: {proteinVal}</div>
+        <div>
+          Daily Carb/Protein Split: {`${carbPercent}/${100 - carbPercent}`}
+        </div>
+        <div>BMR: {bmr}</div>
       </div>
     </div>
   );
