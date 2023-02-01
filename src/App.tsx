@@ -101,98 +101,105 @@ export const App = () => {
 
 	return (
 		<div className='App'>
-			<h1 className='text-4xl'>Calorie and Macro Calculator</h1>
-			<div className='container p-5 mx-auto'>
-				<Select label={'Diet'} options={dietOptions} />
-				<Select label={'Units'} options={unitOptions} />
-				<NumInput
-					label={'Age'}
-					value={age}
-					onChange={handleAgeChange}
-				/>
-				<NumInput
-					label={'Weight'}
-					value={weight}
-					onChange={handleWeightChange}
-				/>
-				<NumInput
-					label={'Height'}
-					value={height}
-					onChange={handleHeightChange}
-				/>
-
-				<form className='container flex-col'>
-					<label className='label'>Sex</label>
-					<div className='btn-group flex'>
-						<input
-							type='radio'
-							name='sex'
-							className='btn'
-							data-title='Male'
-							value='male'
-							onChange={handleSexChange}
-						/>
-						<input
-							type='radio'
-							name='sex'
-							className='btn'
-							data-title='Female'
-							value='female'
-							onChange={handleSexChange}
-						/>
-					</div>
-				</form>
-
-				<div className='flex'>
-					<Select
-						label={'Activity Level'}
-						options={activityOptions}
-						value={activityLvl}
-						onChange={handleActivityChange}
+			<h1 className='text-5xl font-black'>The Macrolator</h1>
+			<h2 className='text-2xl font-extralight'>
+				Calorie and Macro Calculator
+			</h2>
+			<div className='container flex p-5'>
+				<div className='container p-5'>
+					<Select label={'Diet'} options={dietOptions} />
+					<Select label={'Units'} options={unitOptions} />
+					<NumInput
+						label={'Age'}
+						value={age}
+						onChange={handleAgeChange}
 					/>
-					{/* <Tooltip content={'level of activity'} /> */}
-				</div>
-				<Select
-					label={'Goal'}
-					options={goalOptions}
-					value={goal}
-					onChange={handleGoalChange}
-				/>
+					<NumInput
+						label={'Weight'}
+						value={weight}
+						onChange={handleWeightChange}
+					/>
+					<NumInput
+						label={'Height'}
+						value={height}
+						onChange={handleHeightChange}
+					/>
 
-				<Slider
-					label={'Daily Protein'}
-					min={0.82}
-					max={1.5}
-					step={0.01}
-					value={proteinVal}
-					unit={'g'}
-					onChange={handleProteinChange}
-				/>
-				<Slider
-					label={'Daily Carb/Protein Split'}
-					min={0}
-					max={100}
-					step={1}
-					value={carbPercent}
-					unit={`/${100 - carbPercent}`}
-					onChange={handleCarbSplitChange}
-				/>
-			</div>
-			<div className='container'>
-				<h1>Test Display</h1>
-				<div>Age: {age}</div>
-				<div>Weight: {weight}</div>
-				<div>Height: {height}</div>
-				<div>Sex: {sex}</div>
-				<div>Activity Level: {activityLvl}</div>
-				<div>Goal: {goal}</div>
-				<div>Daily Protein: {proteinVal}</div>
-				<div>
-					Daily Carb/Protein Split:{' '}
-					{`${carbPercent}/${100 - carbPercent}`}
+					<form className='container flex-col'>
+						<label className='label'>Sex</label>
+						<div className='btn-group flex'>
+							<input
+								type='radio'
+								name='sex'
+								className='btn'
+								data-title='Male'
+								value='male'
+								onChange={handleSexChange}
+							/>
+							<input
+								type='radio'
+								name='sex'
+								className='btn'
+								data-title='Female'
+								value='female'
+								onChange={handleSexChange}
+							/>
+						</div>
+					</form>
+
+					<div className='flex'>
+						<Select
+							label={'Activity Level'}
+							options={activityOptions}
+							value={activityLvl}
+							onChange={handleActivityChange}
+						/>
+						{/* <Tooltip content={'level of activity'} /> */}
+					</div>
+					<Select
+						label={'Goal'}
+						options={goalOptions}
+						value={goal}
+						onChange={handleGoalChange}
+					/>
 				</div>
-				<div>BMR: {bmr}</div>
+
+				{/* Display */}
+				<div className='container flex flex-col flex-grow shadow-md p-8 rounded-xl space-y-5'>
+					<h1 className='text-3xl my-5 font-black'>Results</h1>
+					<div>Age: {age}</div>
+					<div>Weight: {weight}</div>
+					<div>Height: {height}</div>
+					<div>Sex: {sex}</div>
+					<div>Activity Level: {activityLvl}</div>
+					<div>Goal: {goal}</div>
+					<div>Daily Protein: {proteinVal}</div>
+					<div>
+						Daily Carb/Protein Split:{' '}
+						{`${carbPercent}/${100 - carbPercent}`}
+					</div>
+					<div>BMR: {bmr}</div>
+				</div>
 			</div>
+
+			<Slider
+				label={'Daily Protein'}
+				min={0.82}
+				max={1.5}
+				step={0.01}
+				value={proteinVal}
+				unit={'g'}
+				onChange={handleProteinChange}
+			/>
+			<Slider
+				label={'Daily Carb/Protein Split'}
+				min={0}
+				max={100}
+				step={1}
+				value={carbPercent}
+				unit={`/${100 - carbPercent}`}
+				onChange={handleCarbSplitChange}
+			/>
 		</div>
 	);
 };
