@@ -1,46 +1,53 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { ChangeEventHandler, SetStateAction, useEffect, useState } from 'react';
 import './App.css';
 import { NumInput } from './NumInput';
+import { RadioToggle } from './RadioToggle';
 import { Select } from './Select';
 import { Slider } from './Slider';
-import { Tooltip } from './Tooltip';
+// import { Tooltip } from './Tooltip';
 
 export const App = () => {
 	const dietOptions = ['Standard'];
 	const unitOptions = ['Imperial', 'Metric'];
-	// const activityOptions = [
-	// 	'Sedentary',
-	// 	'Lightly Active',
-	// 	'Moderately Active',
-	// 	'Very Active',
-	// 	'Extremely Active',
-	// ];
 
-	const activityOptions: { lvl: string; scaleFactor: number }[] = [
-		{ lvl: 'Sedentary', scaleFactor: 1.2 },
-		{ lvl: 'Lightly Active', scaleFactor: 1.375 },
-		{ lvl: 'Moderately Active', scaleFactor: 1.55 },
-		{ lvl: 'Very Active', scaleFactor: 1.725 },
-		{ lvl: 'Extremely Active', scaleFactor: 1.9 },
-	];
+	interface DataProps {
+		[key: string]: number;
+	}
 
-	const goalOptions = [
-		'Lose Weight',
-		'Slowly Lose Weight',
-		'Maintain Weight',
-		'Slowly Gain Weight',
-		'Gain Weight',
-	];
+	const activityOptions: DataProps = {
+		Sedentary: 1.2,
+		'Lightly Active': 1.375,
+		'Moderately Active': 1.55,
+		'Very Active': 1.725,
+		'Extremely Active': 1.9,
+	};
 
+	const goalOptions: DataProps = {
+		'Lose Weight': -20,
+		'Slowly Lose Weight': -10,
+		'Maintain Weight': 0,
+		'Slowly Gain Weight': 10,
+		'Gain Weight': 20,
+	};
+
+	const [unit, setUnit] = useState('imperial');
 	const [age, setAge] = useState(18);
 	const [weight, setWeight] = useState(120);
 	const [height, setHeight] = useState(60);
 	const [sex, setSex] = useState('male');
-	const [activityLvl, setActivityLvl] = useState('Sedentary');
+	const [activityLvl, setActivityLvl] = useState(
+		Object.keys(activityOptions)[0]
+	);
 	const [goal, setGoal] = useState('Maintain Weight');
 	const [proteinVal, setProteinVal] = useState(1.0);
 	const [carbPercent, setCarbPercent] = useState(50);
 	const [bmr, setBmr] = useState(0);
+
+	const handleUnitChange = (e: {
+		target: { value: SetStateAction<string> };
+	}) => {
+		setUnit(e.target.value);
+	};
 
 	const handleAgeChange = (e: {
 		target: { value: SetStateAction<number> };
@@ -61,14 +68,14 @@ export const App = () => {
 	};
 
 	const handleSexChange = (e: {
-		target: { value: SetStateAction<number> };
+		target: { value: SetStateAction<string> };
 	}) => {
 		console.log(e.target);
 		setSex(e.target.value);
 	};
 
 	const handleActivityChange = (e: {
-		target: { value: SetStateAction<number> };
+		target: { value: ChangeEventHandler<HTMLSelectElement> };
 	}) => {
 		console.log(e.target);
 		setActivityLvl(e.target.value);
@@ -105,7 +112,10 @@ export const App = () => {
 
 	const mifflinStJeor = (mass: number, heightCM: number) => {
 		let s = sex == 'male' ? 5 : -161;
-		return Math.floor(10 * mass + 6.25 * heightCM - 5.0 * age + s);
+		return Math.floor(
+			(10 * mass + 6.25 * heightCM - 5.0 * age + s) *
+				activityOptions[activityLvl]
+		);
 	};
 
 	return (
@@ -116,49 +126,51 @@ export const App = () => {
 			</h2>
 			<div className='container flex p-5'>
 				<div className='container p-5'>
-					<Select label={'Diet'} options={dietOptions} />
-					<Select label={'Units'} options={unitOptions} />
+					{/* TODO: Refactor this to replace the toggle below*/}
+					<div className='flex space-x-2'>
+						<label htmlFor=''>lb</label>
+						<input type='checkbox' className='toggle' />
+						<label htmlFor=''>kg</label>
+					</div>
+
+					<RadioToggle
+						label='Units'
+						name='units'
+						dataLeft='lb'
+						dataRight='kg'
+						valueLeft='imperial'
+						valueRight='metric'
+						onChange={handleUnitChange}
+					/>
 					<NumInput
-						label={'Age'}
+						label='Age'
 						value={age}
 						onChange={handleAgeChange}
 					/>
 					<NumInput
-						label={'Weight'}
+						label='Weight'
 						value={weight}
 						onChange={handleWeightChange}
 					/>
 					<NumInput
-						label={'Height'}
+						label='Height'
 						value={height}
 						onChange={handleHeightChange}
 					/>
 
-					<form className='container flex-col'>
-						<label className='label'>Sex</label>
-						<div className='btn-group flex'>
-							<input
-								type='radio'
-								name='sex'
-								className='btn'
-								data-title='Male'
-								value='male'
-								onChange={handleSexChange}
-							/>
-							<input
-								type='radio'
-								name='sex'
-								className='btn'
-								data-title='Female'
-								value='female'
-								onChange={handleSexChange}
-							/>
-						</div>
-					</form>
+					<RadioToggle
+						label='Sex'
+						name='sex'
+						dataLeft='Male'
+						dataRight='Female'
+						valueLeft='male'
+						valueRight='female'
+						onChange={handleSexChange}
+					/>
 
 					<div className='flex'>
 						<Select
-							label={'Activity Level'}
+							label='Activity Level'
 							options={activityOptions}
 							value={activityLvl}
 							onChange={handleActivityChange}
@@ -176,6 +188,7 @@ export const App = () => {
 				{/* Display */}
 				<div className='container flex flex-col flex-grow shadow-md p-8 rounded-xl space-y-5'>
 					<h1 className='text-3xl my-5 font-black'>Results</h1>
+					<div>Unit: {unit}</div>
 					<div>Age: {age}</div>
 					<div>Weight: {weight}</div>
 					<div>Height: {height}</div>
@@ -192,7 +205,7 @@ export const App = () => {
 			</div>
 
 			<Slider
-				label={'Daily Protein'}
+				label='Daily Protein'
 				min={0.82}
 				max={1.5}
 				step={0.01}
@@ -201,7 +214,7 @@ export const App = () => {
 				onChange={handleProteinChange}
 			/>
 			<Slider
-				label={'Daily Carb/Protein Split'}
+				label='Daily Carb/Protein Split'
 				min={0}
 				max={100}
 				step={1}
