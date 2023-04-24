@@ -1,3 +1,3 @@
-# calorie-macro-calc
+# The Macrolator
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-hwyzh2)
+The Macrolator is a calorie and macro calculator that provides recommendations based on users' measurements and fitness goals.
