@@ -35,9 +35,7 @@ export const App = () => {
 	const [weight, setWeight] = useState(120);
 	const [height, setHeight] = useState(60);
 	const [sex, setSex] = useState('male');
-	const [activityLvl, setActivityLvl] = useState(
-		Object.keys(activityOptions)[0]
-	);
+	const [activityLvl, setActivityLvl] = useState('Sedentary');
 	const [goal, setGoal] = useState('Maintain Weight');
 	const [proteinVal, setProteinVal] = useState(1.0);
 	const [carbPercent, setCarbPercent] = useState(50);
@@ -126,13 +124,6 @@ export const App = () => {
 			</h2>
 			<div className='container flex p-5'>
 				<div className='container p-5'>
-					{/* TODO: Refactor this to replace the toggle below*/}
-					<div className='flex space-x-2'>
-						<label htmlFor=''>lb</label>
-						<input type='checkbox' className='toggle' />
-						<label htmlFor=''>kg</label>
-					</div>
-
 					<RadioToggle
 						label='Units'
 						name='units'
@@ -141,6 +132,7 @@ export const App = () => {
 						valueLeft='imperial'
 						valueRight='metric'
 						onChange={handleUnitChange}
+						defaultVal='imperial'
 					/>
 					<NumInput
 						label='Age'
@@ -166,6 +158,7 @@ export const App = () => {
 						valueLeft='male'
 						valueRight='female'
 						onChange={handleSexChange}
+						defaultVal='female'
 					/>
 
 					<div className='flex'>
