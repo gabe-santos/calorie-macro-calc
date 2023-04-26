@@ -20,6 +20,10 @@ export const DonutChart = ({ dataset }: DonutChartProps) => {
 					'hsl(168deg 44% 49%)',
 				],
 				borderWidth: 0,
+				hoverOffset: 20,
+				cutout: '70%',
+				// responsive: true,
+				// maintainAspectRatio: false,
 			},
 		],
 	};
@@ -36,5 +40,6 @@ export const DonutChart = ({ dataset }: DonutChartProps) => {
 			},
 		},
 	};
+
 	return <Doughnut data={data} options={options} />;
 };

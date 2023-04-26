@@ -77,7 +77,7 @@ export const FormDisplay = ({
 	handleCarbSplitChange,
 }: FormDisplayProps) => {
 	return (
-		<div className='container p-5'>
+		<div className='flex flex-col max-h-full container p-5 justify-evenly'>
 			<RadioToggle
 				name='units'
 				dataLeft='lb'

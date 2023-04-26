@@ -28,8 +28,8 @@ export const ResultsDisplay = ({
 	tdee,
 }: ResultsDisplayProps) => {
 	return (
-		<div className='container flex flex-col flex-grow shadow-md p-8 rounded-xl space-y-5'>
-			<h1 className='text-3xl my-5 font-black'>Results</h1>
+		<div className='container flex flex-col flex-grow shadow-md p-8 rounded-xl space-y-5 text-left'>
+			<h1 className='text-3xl my-5 font-semibold text-center'>Results</h1>
 			<div>Unit: {unit}</div>
 			<div>Age: {age}</div>
 			<div>Weight: {weight}</div>

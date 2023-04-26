@@ -1,16 +1,12 @@
 #root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
-	background-color: hsl(2deg 15% 97%);
+	/* max-width: 1280px; */
+	/* margin: 0 auto; */
+	/* padding: 2rem; */
+	/* text-align: center; */
+	/* background-color: hsl(2deg 15% 97%); */
 }
 
-h1 {
-	color: hsl(2deg 95% 67%);
-}
-
-.logo {
+/* .logo {
 	height: 6em;
 	padding: 1.5em;
 	will-change: filter;
@@ -21,9 +17,9 @@ h1 {
 }
 .logo.react:hover {
 	filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
 
-@keyframes logo-spin {
+/* @keyframes logo-spin {
 	from {
 		transform: rotate(0deg);
 	}
@@ -44,4 +40,4 @@ h1 {
 
 .read-the-docs {
 	color: #888;
-}
+} */
