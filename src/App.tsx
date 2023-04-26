@@ -155,7 +155,6 @@ export const App = () => {
 			<div className='container flex p-5'>
 				<div className='container p-5'>
 					<RadioToggle
-						label='Units'
 						name='units'
 						dataLeft='lb'
 						dataRight='kg'
@@ -181,7 +180,6 @@ export const App = () => {
 					/>
 
 					<RadioToggle
-						label='Sex'
 						name='sex'
 						dataLeft='Male'
 						dataRight='Female'
