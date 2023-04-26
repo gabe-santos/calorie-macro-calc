@@ -1,57 +1,51 @@
-import { Chart, DoughnutController, ArcElement } from 'chart.js';
-import { useRef, useEffect } from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 
-Chart.register(DoughnutController, ArcElement);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface DonutChartProps {
-	data: number[];
+	dataset: number[];
 	labels: string[];
-	backgroundColors: string[];
+	bgColors: string[];
 }
 
-export const DonutChart = ({
-	data,
-	labels,
-	backgroundColors,
-}: DonutChartProps) => {
-	const chartRef = useRef();
-
-	useEffect(() => {
-		const canvasRef = chartRef.current;
-		const ctx = canvasRef.getContext('2d');
-
-		let chartInstance = new Chart(ctx, {
-			type: 'doughnut',
-			data: {
-				labels: labels,
-				datasets: [
-					{
-						data: data,
-						backgroundColor: backgroundColors,
-						borderWidth: 0,
-						hoverOffset: 20,
-					},
-				],
+export const DonutChart = ({ dataset, labels, bgColors }: DonutChartProps) => {
+	const data = {
+		labels: labels,
+		datasets: [
+			{
+				label: 'grams',
+				data: dataset,
+				backgroundColor: bgColors,
+				borderWidth: 0,
+				hoverOffset: 20,
 			},
-			options: {
-				cutout: '70%',
-				responsive: true,
-				maintainAspectRatio: false,
-				layout: {
-					padding: 20,
+		],
+	};
+
+	const options = {
+		cutout: '80%',
+		responsive: true,
+		maintainAspectRatio: false,
+		layout: {
+			padding: 20,
+		},
+
+		plugins: {
+			legend: {
+				display: true,
+				position: 'bottom',
+				labels: {
+					usePointStyle: true,
+					boxWidth: 20,
 				},
 			},
-		});
-
-		// Cleanup function to destroy the chart instance
-		return () => {
-			chartInstance.destroy();
-		};
-	}, [data, labels, backgroundColors]);
+		},
+	};
 
 	return (
-		<div className='chart-container max-w-full'>
-			<canvas ref={chartRef} />
+		<div className='chart-wrapper h-[32rem]'>
+			<Doughnut data={data} options={options} />
 		</div>
 	);
 };
