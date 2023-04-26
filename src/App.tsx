@@ -1,10 +1,9 @@
 import { ChangeEventHandler, SetStateAction, useEffect, useState } from 'react';
 import './App.css';
-import { NumInput } from './NumInput';
-import { RadioToggle } from './RadioToggle';
-import { Select } from './Select';
-import { Slider } from './Slider';
-import { DonutChart } from './DonutChart';
+import { NumInput } from './components/NumInput';
+import { RadioToggle } from './components/RadioToggle';
+import { Select } from './components/Select';
+import { Slider } from './components/Slider';
 import { ResultsDisplay } from './components/ResultsDisplay';
 
 export const App = () => {
