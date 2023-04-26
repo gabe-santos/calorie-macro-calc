@@ -4,7 +4,6 @@ import { NumInput } from './NumInput';
 import { RadioToggle } from './RadioToggle';
 import { Select } from './Select';
 import { Slider } from './Slider';
-// import { Tooltip } from './Tooltip';
 
 export const App = () => {
 	const dietOptions = ['Standard'];
@@ -102,18 +101,32 @@ export const App = () => {
 		setBmr(() => calculateBMR());
 	});
 
-	const calculateBMR = () => {
-		let mass = weight * 0.453592;
-		let heightCM = height * 2.54;
-		return mifflinStJeor(mass, heightCM);
+	const lbsToKg = (lbs: number): number => {
+		return lbs * 0.453592;
 	};
 
-	const mifflinStJeor = (mass: number, heightCM: number) => {
-		let s = sex == 'male' ? 5 : -161;
-		return Math.floor(
-			(10 * mass + 6.25 * heightCM - 5.0 * age + s) *
-				activityOptions[activityLvl]
-		);
+	const inToCm = (inches: number): number => {
+		return inches * 2.54;
+	};
+
+	const calculateBMR = (): number => {
+		const weightKg = unit == 'metric' ? weight : lbsToKg(weight);
+		const heightCm = unit == 'metric' ? height : inToCm(height);
+		return Math.round(mifflinStJeor(weightKg, heightCm, age, sex));
+	};
+
+	const mifflinStJeor = (
+		mass: number,
+		heightCM: number,
+		age: number,
+		sex: string
+	) => {
+		let s = sex === 'male' ? 5 : -161;
+		return 10 * mass + 6.25 * heightCM - 5.0 * age + s;
+	};
+
+	const calculateTDEE = (): number => {
+		return Math.round(calculateBMR() * activityOptions[activityLvl]);
 	};
 
 	return (
@@ -194,6 +207,7 @@ export const App = () => {
 						{`${carbPercent}/${100 - carbPercent}`}
 					</div>
 					<div>BMR: {bmr}</div>
+					<div>TDEE: {calculateTDEE()}</div>
 				</div>
 			</div>
 
