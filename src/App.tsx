@@ -7,9 +7,6 @@ import { Slider } from './Slider';
 import { DonutChart } from './DonutChart';
 
 export const App = () => {
-	const dietOptions = ['Standard'];
-	const unitOptions = ['Imperial', 'Metric'];
-
 	interface DataProps {
 		[key: string]: number;
 	}
@@ -41,61 +38,76 @@ export const App = () => {
 	const [carbPercent, setCarbPercent] = useState(50);
 	const [bmr, setBmr] = useState(0);
 
-	const handleUnitChange = (e: {
-		target: { value: SetStateAction<string> };
+	const handleUnitChange = ({
+		target: { value },
+	}: {
+		target: { value: string };
 	}) => {
-		setUnit(e.target.value);
+		setUnit(value);
 	};
 
-	const handleAgeChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleAgeChange = ({
+		target: { value },
+	}: {
+		target: { value: number };
 	}) => {
-		setAge(e.target.value);
+		setAge(value);
 	};
 
-	const handleWeightChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleWeightChange = ({
+		target: { value },
+	}: {
+		target: { value: number };
 	}) => {
-		setWeight(e.target.value);
+		setWeight(value);
 	};
 
-	const handleHeightChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleHeightChange = ({
+		target: { value },
+	}: {
+		target: { value: number };
 	}) => {
-		setHeight(e.target.value);
+		setHeight(value);
 	};
 
-	const handleSexChange = (e: {
-		target: { value: SetStateAction<string> };
+	const handleSexChange = ({
+		target: { value },
+	}: {
+		target: { value: string };
 	}) => {
-		console.log(e.target);
-		setSex(e.target.value);
+		setSex(value);
 	};
 
-	const handleActivityChange = (e: {
-		target: { value: ChangeEventHandler<HTMLSelectElement> };
+	const handleActivityChange = ({
+		target: { value },
+	}: {
+		target: { value: string };
 	}) => {
-		console.log(e.target);
-		setActivityLvl(e.target.value);
+		setActivityLvl(value);
 	};
 
-	const handleGoalChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleGoalChange = ({
+		target: { value },
+	}: {
+		target: { value: string };
 	}) => {
-		console.log(e.target);
-		setGoal(String(e.target.value));
+		setGoal(String(value));
 	};
 
-	const handleProteinChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleProteinChange = ({
+		target: { value },
+	}: {
+		target: { value: number };
 	}) => {
-		setProteinVal(e.target.value);
+		setProteinVal(value);
 	};
 
-	const handleCarbSplitChange = (e: {
-		target: { value: SetStateAction<number> };
+	const handleCarbSplitChange = ({
+		target: { value },
+	}: {
+		target: { value: number };
 	}) => {
-		setCarbPercent(e.target.value);
+		setCarbPercent(value);
 	};
 
 	useEffect(() => {
@@ -133,8 +145,6 @@ export const App = () => {
 	const calculateProtein = (): number => {
 		return Math.round(proteinVal * weight);
 	};
-
-	const dataset = [134, 45, 45];
 
 	return (
 		<div className='App'>
