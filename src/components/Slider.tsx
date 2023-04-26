@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 interface SliderProps {
 	label: string;
 	min: number;
@@ -7,7 +5,7 @@ interface SliderProps {
 	value: number;
 	step: number;
 	unit: string;
-	onChange: Function;
+	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Slider = ({
@@ -19,13 +17,6 @@ export const Slider = ({
 	unit,
 	onChange,
 }: SliderProps) => {
-	const [sliderVal, setSliderVal] = useState(0);
-
-	// const handleChange = (e) => {
-	//   setSliderVal(e.target.value);
-	//   console.log(e.target.value);
-	// };
-
 	return (
 		<div className='form-control'>
 			<div className='flex'>
