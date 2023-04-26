@@ -4,6 +4,7 @@ import { NumInput } from './NumInput';
 import { RadioToggle } from './RadioToggle';
 import { Select } from './Select';
 import { Slider } from './Slider';
+import { DonutChart } from './DonutChart';
 
 export const App = () => {
 	const dietOptions = ['Standard'];
@@ -129,6 +130,12 @@ export const App = () => {
 		return Math.round(calculateBMR() * activityOptions[activityLvl]);
 	};
 
+	const calculateProtein = (): number => {
+		return Math.round(proteinVal * weight);
+	};
+
+	const dataset = [134, 45, 45];
+
 	return (
 		<div className='App'>
 			<h1 className='text-5xl font-black'>The Macrolator</h1>
@@ -201,13 +208,20 @@ export const App = () => {
 					<div>Sex: {sex}</div>
 					<div>Activity Level: {activityLvl}</div>
 					<div>Goal: {goal}</div>
-					<div>Daily Protein: {proteinVal}</div>
+					<div>Daily Protein: {calculateProtein()}</div>
 					<div>
 						Daily Carb/Protein Split:{' '}
 						{`${carbPercent}/${100 - carbPercent}`}
 					</div>
 					<div>BMR: {bmr}</div>
 					<div>TDEE: {calculateTDEE()}</div>
+					<DonutChart
+						dataset={[
+							calculateProtein(),
+							carbPercent,
+							100 - carbPercent,
+						]}
+					/>
 				</div>
 			</div>
 
