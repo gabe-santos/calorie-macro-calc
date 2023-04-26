@@ -34,7 +34,7 @@ export const ResultsDisplay = ({
 	const fatCount = 100 - carbPercent;
 
 	return (
-		<div className='container flex flex-col shadow-xl p-8 rounded-2xl space-y-5 text-left max-h-full'>
+		<div className='container flex flex-col shadow-xl p-8 rounded-2xl space-y-5 text-left max-h-full max-w-[50%]'>
 			<h1 className='text-4xl mt-5 font-semibold text-center text-zinc-800'>
 				Results
 			</h1>
