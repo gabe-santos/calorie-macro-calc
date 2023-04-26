@@ -5,6 +5,7 @@ import { RadioToggle } from './RadioToggle';
 import { Select } from './Select';
 import { Slider } from './Slider';
 import { DonutChart } from './DonutChart';
+import { ResultsDisplay } from './components/ResultsDisplay';
 
 export const App = () => {
 	interface DataProps {
@@ -208,31 +209,19 @@ export const App = () => {
 					/>
 				</div>
 
-				{/* Display */}
-				<div className='container flex flex-col flex-grow shadow-md p-8 rounded-xl space-y-5'>
-					<h1 className='text-3xl my-5 font-black'>Results</h1>
-					<div>Unit: {unit}</div>
-					<div>Age: {age}</div>
-					<div>Weight: {weight}</div>
-					<div>Height: {height}</div>
-					<div>Sex: {sex}</div>
-					<div>Activity Level: {activityLvl}</div>
-					<div>Goal: {goal}</div>
-					<div>Daily Protein: {calculateProtein()}</div>
-					<div>
-						Daily Carb/Protein Split:{' '}
-						{`${carbPercent}/${100 - carbPercent}`}
-					</div>
-					<div>BMR: {bmr}</div>
-					<div>TDEE: {calculateTDEE()}</div>
-					<DonutChart
-						dataset={[
-							calculateProtein(),
-							carbPercent,
-							100 - carbPercent,
-						]}
-					/>
-				</div>
+				<ResultsDisplay
+					unit={unit}
+					age={age}
+					weight={weight}
+					height={height}
+					sex={sex}
+					activityLvl={activityLvl}
+					goal={goal}
+					dailyProtein={calculateProtein()}
+					carbPercent={carbPercent}
+					bmr={bmr}
+					tdee={calculateTDEE()}
+				/>
 			</div>
 
 			<Slider
