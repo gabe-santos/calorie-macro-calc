@@ -33,7 +33,7 @@ export const Slider = ({
 				max={max}
 				step={step}
 				value={value}
-				className='range'
+				className='range range-xs'
 				onChange={onChange}
 			/>
 		</div>
