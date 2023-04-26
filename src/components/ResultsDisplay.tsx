@@ -1,4 +1,5 @@
 import { DonutChart } from './DonutChart';
+import { StatsDisplay } from './StatsDisplay';
 
 interface ResultsDisplayProps {
 	unit: string;
@@ -27,26 +28,31 @@ export const ResultsDisplay = ({
 	bmr,
 	tdee,
 }: ResultsDisplayProps) => {
+	const calorieCount = tdee + 2000; // FIXME: fix these equations
+	const proteinCount = dailyProtein;
+	const carbCount = carbPercent;
+	const fatCount = 100 - carbPercent;
+
 	return (
 		<div className='container flex flex-col shadow-xl p-8 rounded-2xl space-y-5 text-left max-h-full'>
-			<h1 className='text-3xl my-5 font-semibold text-center'>Results</h1>
-			<div>Unit: {unit}</div>
-			<div>Age: {age}</div>
-			<div>Weight: {weight}</div>
-			<div>Height: {height}</div>
-			<div>Sex: {sex}</div>
-			<div>Activity Level: {activityLvl}</div>
-			<div>Goal: {goal}</div>
-			<div>Daily Protein: {dailyProtein}</div>
-			<div>
-				Daily Carb/Protein Split:{' '}
-				{`${carbPercent}/${100 - carbPercent}`}
-			</div>
-			<div>BMR: {bmr}</div>
-			<div>TDEE: {tdee}</div>
+			<h1 className='text-4xl mt-5 font-semibold text-center text-zinc-800'>
+				Results
+			</h1>
+			<p className='mt-5 text-xl text-center'>
+				Your BMR is <b>{bmr}</b> cal / day
+			</p>
+			<p className='text-xl text-center'>
+				Your TDEE is <b>{tdee}</b> cal / day
+			</p>
+			<StatsDisplay
+				calories={calorieCount}
+				protein={proteinCount}
+				carbs={carbCount}
+				fat={fatCount}
+			/>
 			<DonutChart
 				dataset={[dailyProtein, carbPercent, 100 - carbPercent]}
-				labels={['Protein', 'Carbs', 'Fat']}
+				labels={[`${dailyProtein}g of protein`, 'Carbs', 'Fat']}
 				bgColors={[
 					'hsl(145deg 63% 49%)',
 					'hsl(37deg 90% 51%)',

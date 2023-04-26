@@ -113,12 +113,12 @@ export const App = () => {
 	});
 
 	return (
-		<div className='App m-0 p-5 h-screen flex flex-col text-center '>
+		<div className='App m-0 p-5 h-screen flex flex-col text-center font-inter text-zinc-700'>
 			<h1 className='text-6xl font-bold text-zinc-800'>The Macrolator</h1>
 			<h2 className='text-2xl font-normal text-zinc-500'>
 				Calorie and Macro Calculator
 			</h2>
-			<div className='container flex p-5 max-w-6xl mx-auto max-h-[62rem]'>
+			<div className='container flex p-5 max-w-6xl mx-auto max-h-[68rem]'>
 				<FormDisplay
 					age={age}
 					weight={weight}

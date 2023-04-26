@@ -33,7 +33,7 @@ export const Slider = ({
 				max={max}
 				step={step}
 				value={value}
-				className='range range-xs'
+				className='accent-zinc-600'
 				onChange={onChange}
 			/>
 		</div>

@@ -10,6 +10,7 @@ interface RadioToggleProps {
 	valueRight: string;
 	onChange: NewType;
 	defaultVal?: string;
+	className?: string;
 }
 
 export const RadioToggle = ({
@@ -20,6 +21,7 @@ export const RadioToggle = ({
 	valueRight,
 	onChange,
 	defaultVal = valueLeft,
+	className = '',
 }: RadioToggleProps) => {
 	const [checkedVal, setCheckedVal] = useState(defaultVal);
 
@@ -29,11 +31,11 @@ export const RadioToggle = ({
 
 	return (
 		<div>
-			<div className='btn-group flex'>
+			<div className={`btn-group flex ${className}`}>
 				<input
 					type='radio'
 					name={name}
-					className='btn btn-sm'
+					className='btn btn-xs checked:shadow-inner bg-zinc-400 font-normal border-none'
 					data-title={dataLeft}
 					value={valueLeft}
 					checked={checkedVal === valueLeft}
@@ -45,7 +47,7 @@ export const RadioToggle = ({
 				<input
 					type='radio'
 					name={name}
-					className='btn btn-sm'
+					className='btn btn-xs checked:shadow-inner bg-zinc-400 checked:bg-zinc-800 font-normal border-none'
 					data-title={dataRight}
 					value={valueRight}
 					checked={checkedVal === valueRight}

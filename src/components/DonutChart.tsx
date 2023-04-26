@@ -44,7 +44,7 @@ export const DonutChart = ({ dataset, labels, bgColors }: DonutChartProps) => {
 	};
 
 	return (
-		<div className='chart-wrapper h-[32rem]'>
+		<div className='chart-wrapper h-[16rem]'>
 			<Doughnut data={data} options={options} />
 		</div>
 	);

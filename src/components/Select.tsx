@@ -11,7 +11,7 @@ export const Select = ({ label, options, value, onChange }: SelectProps) => {
 	return (
 		<div className='form-control my-4'>
 			<select
-				className='select select-bordered max-w-xs'
+				className='select border-none max-w-xs shadow-inner font-normal text-zinc-600'
 				value={value}
 				onChange={onChange}>
 				{Object.keys(options).map(item => (

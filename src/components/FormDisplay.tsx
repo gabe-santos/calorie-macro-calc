@@ -78,15 +78,27 @@ export const FormDisplay = ({
 }: FormDisplayProps) => {
 	return (
 		<div className='flex flex-col max-h-full container p-5 justify-evenly'>
-			<RadioToggle
-				name='units'
-				dataLeft='lb'
-				dataRight='kg'
-				valueLeft='imperial'
-				valueRight='metric'
-				onChange={handleUnitChange}
-				defaultVal='imperial'
-			/>
+			<div className='flex max-w-full justify-start mx-0'>
+				<RadioToggle
+					name='units'
+					dataLeft='lb'
+					dataRight='kg'
+					valueLeft='imperial'
+					valueRight='metric'
+					onChange={handleUnitChange}
+					defaultVal='imperial'
+				/>
+				<RadioToggle
+					name='sex'
+					dataLeft='Male'
+					dataRight='Female'
+					valueLeft='male'
+					valueRight='female'
+					onChange={handleSexChange}
+					defaultVal='female'
+					className='ml-4'
+				/>
+			</div>
 			<NumInput label='Age' value={age} onChange={handleAgeChange} />
 			<NumInput
 				label='Weight'
@@ -97,16 +109,6 @@ export const FormDisplay = ({
 				label='Height'
 				value={height}
 				onChange={handleHeightChange}
-			/>
-
-			<RadioToggle
-				name='sex'
-				dataLeft='Male'
-				dataRight='Female'
-				valueLeft='male'
-				valueRight='female'
-				onChange={handleSexChange}
-				defaultVal='female'
 			/>
 
 			<div className='flex'>
