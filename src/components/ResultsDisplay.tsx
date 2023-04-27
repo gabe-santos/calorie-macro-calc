@@ -39,7 +39,7 @@ export const ResultsDisplay = ({
 	const gramsCarbs = Math.round((leftover * carbPercent * 0.01) / 4);
 
 	return (
-		<div className='container flex flex-col p-12 space-y-5 text-left max-h-full max-w-[50%]'>
+		<div className='container flex flex-col p-12 space-y-5 text-left max-h-full md:max-w-[50%]'>
 			<h1 className='text-4xl mt-5 font-semibold text-center text-zinc-800'>
 				Results
 			</h1>
@@ -55,7 +55,7 @@ export const ResultsDisplay = ({
 				carbs={gramsCarbs}
 				fat={gramsFat}
 			/>
-			<DonutChart
+			{/* <DonutChart
 				dataset={[dailyProtein, gramsCarbs, gramsFat]}
 				labels={[`${dailyProtein}g of protein`, 'Carbs', 'Fat']}
 				bgColors={[
@@ -63,7 +63,7 @@ export const ResultsDisplay = ({
 					'hsl(37deg 90% 51%)',
 					'hsl(168deg 44% 49%)',
 				]}
-			/>
+			/> */}
 		</div>
 	);
 };

@@ -118,7 +118,7 @@ export const App = () => {
 			<h2 className='text-2xl font-normal text-zinc-500'>
 				Calorie and Macro Calculator
 			</h2>
-			<div className='container flex flex-col p-5 max-w-6xl mx-auto max-h-[68rem] md:flex-row shadow-md rounded-3xl'>
+			<div className='container flex flex-col p-5 max-w-6xl mx-auto md:max-h-[68rem] md:flex-row shadow-md rounded-3xl'>
 				<FormDisplay
 					age={age}
 					weight={weight}

@@ -31,16 +31,7 @@ export const DonutChart = ({ dataset, labels, bgColors }: DonutChartProps) => {
 			padding: 20,
 		},
 
-		plugins: {
-			legend: {
-				display: true,
-				position: 'bottom',
-				labels: {
-					usePointStyle: true,
-					boxWidth: 20,
-				},
-			},
-		},
+		plugins: {},
 	};
 
 	return (
