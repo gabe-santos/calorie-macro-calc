@@ -32,8 +32,11 @@ export const ResultsDisplay = ({
 	console.log(goalVal);
 	const calorieCount = Math.round(tdee + tdee * goalVal); // FIXME: fix these equations and put them in calculations file
 	const proteinCount = dailyProtein;
-	const carbCount = carbPercent;
-	const fatCount = 100 - carbPercent;
+	const proteinCal = 4;
+	const leftover = calorieCount - proteinCount * proteinCal;
+	const fatPercent = (100 - carbPercent) * 0.01;
+	const gramsFat = Math.round((leftover * fatPercent) / 9);
+	const gramsCarbs = Math.round((leftover * carbPercent * 0.01) / 4);
 
 	return (
 		<div className='container flex flex-col p-12 space-y-5 text-left max-h-full max-w-[50%]'>
@@ -49,11 +52,11 @@ export const ResultsDisplay = ({
 			<StatsDisplay
 				calories={calorieCount}
 				protein={proteinCount}
-				carbs={carbCount}
-				fat={fatCount}
+				carbs={gramsCarbs}
+				fat={gramsFat}
 			/>
 			<DonutChart
-				dataset={[dailyProtein, carbPercent, 100 - carbPercent]}
+				dataset={[dailyProtein, gramsCarbs, gramsFat]}
 				labels={[`${dailyProtein}g of protein`, 'Carbs', 'Fat']}
 				bgColors={[
 					'hsl(145deg 63% 49%)',
