@@ -8,7 +8,7 @@ interface ResultsDisplayProps {
 	height: number;
 	sex: string;
 	activityLvl: string;
-	goal: string;
+	goal: number;
 	dailyProtein: number;
 	carbPercent: number;
 	bmr: number;
@@ -28,13 +28,15 @@ export const ResultsDisplay = ({
 	bmr,
 	tdee,
 }: ResultsDisplayProps) => {
-	const calorieCount = tdee + 2000; // FIXME: fix these equations
+	const goalVal = goal * 0.01;
+	console.log(goalVal);
+	const calorieCount = Math.round(tdee + tdee * goalVal); // FIXME: fix these equations and put them in calculations file
 	const proteinCount = dailyProtein;
 	const carbCount = carbPercent;
 	const fatCount = 100 - carbPercent;
 
 	return (
-		<div className='container flex flex-col shadow-xl p-8 rounded-2xl space-y-5 text-left max-h-full max-w-[50%]'>
+		<div className='container flex flex-col p-12 space-y-5 text-left max-h-full max-w-[50%]'>
 			<h1 className='text-4xl mt-5 font-semibold text-center text-zinc-800'>
 				Results
 			</h1>

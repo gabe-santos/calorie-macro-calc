@@ -77,7 +77,7 @@ export const FormDisplay = ({
 	handleCarbSplitChange,
 }: FormDisplayProps) => {
 	return (
-		<div className='flex flex-col max-h-full container p-5 justify-evenly'>
+		<div className='flex flex-col max-h-full container p-12 justify-evenly mx-2'>
 			<div className='flex max-w-full justify-start mx-0'>
 				<RadioToggle
 					name='units'
@@ -126,16 +126,16 @@ export const FormDisplay = ({
 				onChange={handleGoalChange}
 			/>
 			<Slider
-				label='Daily Protein'
+				label='Protein'
 				min={0.82}
 				max={1.5}
 				step={0.01}
 				value={proteinVal}
-				unit={'g'}
+				unit={'g per pound'}
 				onChange={handleProteinChange}
 			/>
 			<Slider
-				label='Daily Carb/Protein Split'
+				label='Carb/Protein'
 				min={0}
 				max={100}
 				step={1}

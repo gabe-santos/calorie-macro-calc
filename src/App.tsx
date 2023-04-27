@@ -113,12 +113,12 @@ export const App = () => {
 	});
 
 	return (
-		<div className='App m-0 p-5 h-screen flex flex-col text-center font-inter text-zinc-700'>
+		<div className='App m-0 p-5 h-screen flex flex-col text-center font-inter text-zinc-700 '>
 			<h1 className='text-6xl font-bold text-zinc-800'>The Macrolator</h1>
 			<h2 className='text-2xl font-normal text-zinc-500'>
 				Calorie and Macro Calculator
 			</h2>
-			<div className='container flex flex-col p-5 max-w-6xl mx-auto max-h-[68rem] md:flex-row'>
+			<div className='container flex flex-col p-5 max-w-6xl mx-auto max-h-[68rem] md:flex-row shadow-md rounded-3xl'>
 				<FormDisplay
 					age={age}
 					weight={weight}
@@ -146,7 +146,7 @@ export const App = () => {
 					height={height}
 					sex={sex}
 					activityLvl={activityLvl}
-					goal={goal}
+					goal={goalOptions[goal]}
 					dailyProtein={calculateProtein(proteinVal, weight)}
 					carbPercent={carbPercent}
 					bmr={bmr}
